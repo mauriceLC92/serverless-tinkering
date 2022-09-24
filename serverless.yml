@@ -91,7 +91,8 @@ functions:
           method: get
           authorizer: aws_iam
     environment:
-      restaurants_table: ${self:custom.name}-${env:RESTAURANT_TABLE}-${opt:stage, 'dev'}
+      # restaurants_table: ${self:custom.name}-${env:RESTAURANT_TABLE}-${opt:stage, 'dev'}
+      restaurants_table: !Ref RestaurantsTable
 
   search-restaurants:
     handler: functions/search-restaurants.handler
@@ -161,7 +162,7 @@ resources:
     RestaurantsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.name}-${env:RESTAURANT_TABLE}-${opt:stage, 'dev'}
+        # TableName: ${self:custom.name}-${env:RESTAURANT_TABLE}-${opt:stage, 'dev'}
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: name
